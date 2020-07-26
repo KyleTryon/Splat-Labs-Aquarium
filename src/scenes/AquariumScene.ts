@@ -1,5 +1,4 @@
-import { Fish } from "../game/Fish"
-import { config } from ".."
+import { Fish } from "../objects/creatures/Fish"
 export class AquariumScene extends Phaser.Scene {
   private fish: Fish
   constructor() {
@@ -16,8 +15,8 @@ export class AquariumScene extends Phaser.Scene {
   create(): void {
     this.fish = new Fish({
       scene: this,
-      x: "50%",
-      y: "50%",
+      x: 100,
+      y: 100,
       key: "fish_red",
       lifespan: 360,
       name: "test"

@@ -1,3 +1,4 @@
+import "phaser"
 /**
  * Create a new creature
  * @class

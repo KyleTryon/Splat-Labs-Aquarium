@@ -3,8 +3,13 @@
     "files": [
       {
         "type": "image",
-        "key": "fish1",
-        "url": "assets/images/fish/fishTile_078.png"
+        "key": "fish_red",
+        "url": "assets/images/fishTile_078.png"
+      },
+      {
+        "type": "image",
+        "key": "fish_food",
+        "url": "assets/images/fish_food.png"
       }
     ]
   }
