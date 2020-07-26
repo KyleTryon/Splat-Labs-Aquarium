@@ -1,0 +1,11 @@
+{
+  "preload": {
+    "files": [
+      {
+        "type": "image",
+        "key": "fish1",
+        "url": "assets/images/fish/fishTile_078.png"
+      }
+    ]
+  }
+}
