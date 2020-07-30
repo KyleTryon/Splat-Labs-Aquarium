@@ -4,8 +4,10 @@ import "phaser"
  * @class
  */
 export default abstract class Creature extends Phaser.GameObjects.Sprite {
+	_body: Phaser.Physics.Arcade.Body
 	/** Genetics */
 	lifespan: number
+	desiredDepth: number
 	/** Stats */
 	name: string
 	age: number = 0
@@ -13,7 +15,15 @@ export default abstract class Creature extends Phaser.GameObjects.Sprite {
 	health: number = 1
 	speed: number = 0
 	buoyancy: number = 0.5
-	energy: number = 1
+
+	private _energy: number = 100
+	set energy(power: number) {
+		this._energy += power
+	}
+	get energy(): number {
+		return this._energy
+	}
+	
 	fear: number = 0
 	/** Action */
 	direction: number = 90
@@ -22,7 +32,8 @@ export default abstract class Creature extends Phaser.GameObjects.Sprite {
 	public constructor(params) {
 		super(params.scene, params.x, params.y, params.key, params.frame)
 		this.name = params.name
-		this.lifespan = params.lifespan
+		this.lifespan = params.lifespan,
+		this.desiredDepth = params.desiredDepth
 	}
 
 }

@@ -5,6 +5,7 @@ export class AquariumScene extends Phaser.Scene {
     super({
       key: "AquariumScene"
     })
+
   }
 
   preload(): void {
@@ -19,8 +20,12 @@ export class AquariumScene extends Phaser.Scene {
       y: 100,
       key: "fish_red",
       lifespan: 360,
-      name: "test"
+      name: "test",
+      desiredDepth: 300
     })
+  }
+  update() {
+    this.fish.update()
   }
 
 }
