@@ -12,6 +12,7 @@ interface params {
 export class Wander implements IRoutines {
   name: string = "Wander"
   fish: Fish
+  target
 
   constructor(params: params) {
     this.fish = params.fish
@@ -22,10 +23,10 @@ export class Wander implements IRoutines {
   }
 
   execute(): void {
-    if (Phaser.Math.Distance.Between(this.fish.x, this.fish.y, this.fish.target.x, this.fish.target.y) < 5) {
+    if ( this.fish.getDistanceToTartget() < 1) {
       this.fish.target = this.getRandomTarget()
     } else {
-      this.fish.flap(this.fish.target, 20)
+      this.fish.swimToTarget()
     }
   }
 
@@ -34,6 +35,7 @@ export class Wander implements IRoutines {
     let screenHeight = this.fish.scene.cameras.main.height
     let x = Math.random() * screenWidth
     let y = Math.random() * screenHeight
+    console.log("Target Aquired: " + x + " " + y)
     return new Phaser.Math.Vector2(x,y)
   }
 }

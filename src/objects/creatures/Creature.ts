@@ -13,10 +13,10 @@ export default abstract class Creature extends Phaser.GameObjects.Sprite {
 	age: number = 0
 	hunger: number = 0
 	health: number = 1
-	speed: number = 0
+	speed: number = 10
 	buoyancy: number = 0.5
 
-	private _energy: number = 100
+	private _energy: number = 100000000
 	set energy(power: number) {
 		this._energy += power
 	}

@@ -6,6 +6,7 @@ export class Fish extends Creature {
   routineManager: RoutineManager
   scene: Phaser.Scene = this.scene
   max_flap_speed = 1
+  private _lastFlapTime: number = 0
 
 
   public constructor(params) {
@@ -13,7 +14,6 @@ export class Fish extends Creature {
     this.desiredDepth = params.desiredDepth
     this.setScale(0.5)
     this.setOrigin(0, 0)
-    console.log("I am fish")
 
     // Add Physics
     this.scene.add.existing(this)
@@ -30,10 +30,13 @@ export class Fish extends Creature {
   }
 
   update(): void {
-    console.log(this.routineManager.routines[0].fish)
     this.routineManager.execute()
     //Moves the fish to opposite side of bowl if off screen.
     this.edgeCheck()
+  }
+
+  getDistanceToTartget(): number {
+    return Phaser.Math.Distance.Between(this.x, this.y, this.target.x, this.target.y)
   }
 
   edgeCheck(): void {
@@ -45,16 +48,25 @@ export class Fish extends Creature {
     } 
   }
 
-  //Actions
-  flap(toward: Phaser.Math.Vector2, power: number) {
-    if (this.energy < power) {
-      console.log("Fish is too tired to swim")
-    } else {
-      let angle = Phaser.Math.Angle.Between(this.x, this.y, toward.x, toward.y)
-      let x = power * Math.cos(angle)
-      let y = power * Math.sin(angle)
-      this._body.setVelocity(x,y)
-      this.energy -= power
+  swimToTarget(): void {
+    // let powerModifier = (this.getDistanceToTartget() / 3)
+    this.flap(this.target, 20)
+  }
+
+  flap(toward: Phaser.Math.Vector2, power: number): void {
+    console.log("Power needed: " + power)
+    if (Date.now() > this._lastFlapTime) {
+      if (this.energy < power) {
+        console.log("Fish is too tired to swim")
+      } else {
+        console.log("Current engergy: " + this.energy)
+        let angle = Phaser.Math.Angle.Between(this.x, this.y, toward.x, toward.y)
+        let x = power * Math.cos(angle)
+        let y = power * Math.sin(angle)
+        this._body.setVelocity(x,y)
+        this.energy -= (power/10)
+        this._lastFlapTime = (Date.now() + (2000 * this.max_flap_speed))
+      }
     }
   }
 }
