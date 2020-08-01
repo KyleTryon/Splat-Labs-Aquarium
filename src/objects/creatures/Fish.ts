@@ -1,19 +1,23 @@
 import Creature from './Creature'
 import RoutineManager from '../routines/RoutineManager'
+import { AquariumScene } from '../../scenes/AquariumScene'
+import { Time } from 'phaser'
 
-export class Fish extends Creature {
+export default class Fish extends Creature {
 
   routineManager: RoutineManager
-  scene: Phaser.Scene = this.scene
+  scene: AquariumScene = this.scene
   max_flap_speed = 1
   private _lastFlapTime: number = 0
+  private _deltaTime: number
 
 
   public constructor(params) {
     super(params)
     this.desiredDepth = params.desiredDepth
     this.setScale(0.5)
-    this.setOrigin(0, 0)
+    this.setOrigin(0.5, 0.5)
+    this.target = this.scene.getRandomPoint()
 
     // Add Physics
     this.scene.add.existing(this)
@@ -29,23 +33,38 @@ export class Fish extends Creature {
     })
   }
 
-  update(): void {
+  update(delta: number): void {
+    this._deltaTime = (delta / 100 )
+    console.log(this._deltaTime)
     this.routineManager.execute()
     //Moves the fish to opposite side of bowl if off screen.
     this.edgeCheck()
+    this.rotateToTarget()
   }
 
   getDistanceToTartget(): number {
     return Phaser.Math.Distance.Between(this.x, this.y, this.target.x, this.target.y)
   }
 
-  edgeCheck(): void {
+  private edgeCheck(): void {
     if (this.x >= (this.scene.cameras.main.width + (this.width / 2))) {
       this.x = 0 - this.width
     }
     if (this.y >= (this.scene.cameras.main.height + (this.height / 2))) {
       this.y = 0 - this.height
     } 
+  }
+  private rotateToTarget(): void {
+    let angleToTarget = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y)
+    let currentAngle = this.rotation
+    let angleDiff = angleToTarget - currentAngle
+
+    // if (angleDiff < -170) {
+    //   angleDiff += 360
+    // } else if (angleDiff > 170) {
+    //   angleDiff -= 360
+    // }
+    this.rotation = currentAngle + (angleDiff * this._deltaTime)
   }
 
   swimToTarget(): void {

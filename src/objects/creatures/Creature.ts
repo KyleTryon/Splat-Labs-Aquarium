@@ -16,7 +16,7 @@ export default abstract class Creature extends Phaser.GameObjects.Sprite {
 	speed: number = 10
 	buoyancy: number = 0.5
 
-	private _energy: number = 100000000
+	private _energy: number = 1000
 	set energy(power: number) {
 		this._energy += power
 	}
@@ -32,8 +32,7 @@ export default abstract class Creature extends Phaser.GameObjects.Sprite {
 	public constructor(params) {
 		super(params.scene, params.x, params.y, params.key, params.frame)
 		this.name = params.name
-		this.lifespan = params.lifespan,
-		this.desiredDepth = params.desiredDepth
+		this.lifespan = params.lifespan
 	}
 
 }

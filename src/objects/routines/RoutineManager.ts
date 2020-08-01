@@ -1,5 +1,5 @@
 import { IRoutines } from "./IRoutines"
-import { Fish } from "../creatures/Fish"
+import Fish from "../creatures/Fish"
 import { Wander } from './fish/Wander'
 
 interface params {

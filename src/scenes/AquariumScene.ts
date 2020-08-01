@@ -1,6 +1,9 @@
-import { Fish } from "../objects/creatures/Fish"
+import Fish from "../objects/creatures/Fish"
+import Creature from "../objects/creatures/Creature"
+import FishFood from "../objects/consumables/fishFood"
 export class AquariumScene extends Phaser.Scene {
-  private fish: Fish
+  private creatures: Phaser.GameObjects.Group
+  private fishFood: Phaser.GameObjects.Group
   constructor() {
     super({
       key: "AquariumScene"
@@ -14,18 +17,31 @@ export class AquariumScene extends Phaser.Scene {
   }
 
   create(): void {
-    this.fish = new Fish({
-      scene: this,
-      x: 100,
-      y: 100,
-      key: "fish_red",
-      lifespan: 360,
-      name: "test",
-      desiredDepth: 300
+    this.creatures = new Phaser.GameObjects.Group(this)
+
+    this.input.on("pointerdown", () => {
+      this.creatures.add(new Fish({
+        scene: this,
+        x: this.input.x,
+        y: this.input.y,
+        key: "fish_red",
+        lifespan: 360,
+        name: "test4"
+      }))
     })
   }
-  update() {
-    this.fish.update()
+  update(time: number, delta: number) {
+    this.creatures.getChildren().forEach( creature => {
+      creature.update(delta)
+    })
+  }
+
+  public getRandomPoint(): Phaser.Math.Vector2 {
+    let screenWidth = this.cameras.main.width
+    let screenHeight = this.cameras.main.height
+    let x = Math.random() * screenWidth
+    let y = Math.random() * screenHeight
+    return new Phaser.Math.Vector2(x,y)
   }
 
 }

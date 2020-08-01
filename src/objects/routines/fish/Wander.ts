@@ -1,5 +1,5 @@
 import { IRoutines } from "../IRoutines"
-import {Fish} from '../../creatures/Fish'
+import Fish from '../../creatures/Fish'
 
 interface params {
   fish: Fish
@@ -12,7 +12,7 @@ interface params {
 export class Wander implements IRoutines {
   name: string = "Wander"
   fish: Fish
-  target
+  target: Phaser.Math.Vector2
 
   constructor(params: params) {
     this.fish = params.fish
@@ -23,19 +23,11 @@ export class Wander implements IRoutines {
   }
 
   execute(): void {
-    if ( this.fish.getDistanceToTartget() < 1) {
-      this.fish.target = this.getRandomTarget()
+    if ( this.fish.getDistanceToTartget() < 4) {
+      this.fish.target = this.fish.scene.getRandomPoint()
     } else {
       this.fish.swimToTarget()
     }
   }
 
-  private getRandomTarget(): Phaser.Math.Vector2 {
-    let screenWidth = this.fish.scene.cameras.main.width
-    let screenHeight = this.fish.scene.cameras.main.height
-    let x = Math.random() * screenWidth
-    let y = Math.random() * screenHeight
-    console.log("Target Aquired: " + x + " " + y)
-    return new Phaser.Math.Vector2(x,y)
-  }
 }
