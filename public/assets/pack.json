@@ -1,0 +1,16 @@
+{
+  "preload": {
+    "files": [
+      {
+        "type": "image",
+        "key": "fish_red",
+        "url": "assets/images/fishTile_078.png"
+      },
+      {
+        "type": "image",
+        "key": "fish_food",
+        "url": "assets/images/fish_food.png"
+      }
+    ]
+  }
+}

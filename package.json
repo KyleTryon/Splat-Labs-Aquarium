@@ -7,9 +7,10 @@
     "lint": "prettier --check \"src/**/*.js\""
   },
   "dependencies": {
-    "canvas-confetti": "^1.2.0"
+    "phaser": "^3.24.1"
   },
   "devDependencies": {
+    "phaser3_gui_inspector": "^1.2.0",
     "prettier": "^2.0.5",
     "snowpack": "^2.6.4"
   }
