@@ -65,12 +65,13 @@ export default class Fish extends Creature {
     this.rotation = currentAngle + (angleDiff * this._deltaTime)
   }
 
-  swimToTarget(speedModifier?: number): void {
-    speedModifier = speedModifier || 4
-    this.flap(this.target, speedModifier)
+  swimToTarget(power?: number, speedModifier?: number): void {
+    power = power || 4
+    this.flap(this.target, power, speedModifier)
   }
 
-  flap(toward: Phaser.Math.Vector2, power: number): void {
+  flap(toward: Phaser.Math.Vector2, power: number, speedModifier: number): void {
+    speedModifier = speedModifier || 1
     if (Date.now() > this._lastFlapTime) {
       power = this.speed * power
       if (this.energy < power) {
@@ -79,9 +80,11 @@ export default class Fish extends Creature {
         let angle = Phaser.Math.Angle.Between(this.x, this.y, toward.x, toward.y)
         let x = power * Math.cos(angle)
         let y = power * Math.sin(angle)
-        this._body.setVelocity(x,y)
+        let deltaX = this._body.velocity.x + (x - this._body.velocity.x)
+        let deltaY = this._body.velocity.y + (y - this._body.velocity.y)
+        this._body.setVelocity(deltaX,deltaY)
         this.energy -= (power/10)
-        this._lastFlapTime = (Date.now() + (2000 * this.max_flap_speed))
+        this._lastFlapTime = (Date.now() + (2000 / speedModifier))
       }
     }
   }

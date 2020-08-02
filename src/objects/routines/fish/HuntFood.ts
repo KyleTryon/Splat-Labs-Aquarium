@@ -45,7 +45,7 @@ export default class HuntFood implements IRoutines {
         closestFood[0].destroy()
       }
       this.fish.target = newTarget
-      this.fish.swimToTarget()
+      this.fish.swimToTarget(20,2)
     }
   }
 
