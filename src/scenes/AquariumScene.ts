@@ -3,7 +3,7 @@ import Creature from "../objects/creatures/Creature"
 import FishFood from "../objects/consumables/fishFood"
 export class AquariumScene extends Phaser.Scene {
   private creatures: Phaser.GameObjects.Group
-  private fishFood: Phaser.GameObjects.Group
+  fishFood: Phaser.GameObjects.Group
   constructor() {
     super({
       key: "AquariumScene"
@@ -18,15 +18,53 @@ export class AquariumScene extends Phaser.Scene {
 
   create(): void {
     this.creatures = new Phaser.GameObjects.Group(this)
+    this.fishFood = new Phaser.GameObjects.Group(this)
+    this.creatures.add(new Fish({
+      scene: this,
+      x: 100,
+      y: 100,
+      key: "fish_red",
+      lifespan: 360,
+      name: "test1"
+    }))
+    this.creatures.add(new Fish({
+      scene: this,
+      x: 600,
+      y: 600,
+      key: "fish_red",
+      lifespan: 360,
+      name: "test2"
+    }))
+    this.creatures.add(new Fish({
+      scene: this,
+      x: 1000,
+      y: 1000,
+      key: "fish_red",
+      lifespan: 360,
+      name: "test3"
+    }))
+    this.creatures.add(new Fish({
+      scene: this,
+      x:900,
+      y: 200,
+      key: "fish_red",
+      lifespan: 360,
+      name: "test4"
+    }))
+    this.creatures.add(new Fish({
+      scene: this,
+      x:200,
+      y: 900,
+      key: "fish_red",
+      lifespan: 360,
+      name: "test4"
+    }))
 
     this.input.on("pointerdown", () => {
-      this.creatures.add(new Fish({
+      this.fishFood.add (new FishFood({
         scene: this,
         x: this.input.x,
-        y: this.input.y,
-        key: "fish_red",
-        lifespan: 360,
-        name: "test4"
+        y: this.input.y
       }))
     })
   }

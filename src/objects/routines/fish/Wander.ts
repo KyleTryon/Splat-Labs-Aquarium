@@ -9,10 +9,9 @@ interface params {
  * Behavior: Randomly swim in tank. Managed by a RoutineManager.
  * @class
  */
-export class Wander implements IRoutines {
+export default class Wander implements IRoutines {
   name: string = "Wander"
   fish: Fish
-  target: Phaser.Math.Vector2
 
   constructor(params: params) {
     this.fish = params.fish

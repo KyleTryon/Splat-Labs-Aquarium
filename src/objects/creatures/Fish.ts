@@ -35,7 +35,6 @@ export default class Fish extends Creature {
 
   update(delta: number): void {
     this._deltaTime = (delta / 100 )
-    console.log(this._deltaTime)
     this.routineManager.execute()
     //Moves the fish to opposite side of bowl if off screen.
     this.edgeCheck()
@@ -58,27 +57,24 @@ export default class Fish extends Creature {
     let angleToTarget = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y)
     let currentAngle = this.rotation
     let angleDiff = angleToTarget - currentAngle
-
-    // if (angleDiff < -170) {
-    //   angleDiff += 360
-    // } else if (angleDiff > 170) {
-    //   angleDiff -= 360
-    // }
+    if (this.angle < -90 || this.angle > 160){
+      this.flipY = true
+    } else {
+      this.flipY = false
+    }
     this.rotation = currentAngle + (angleDiff * this._deltaTime)
   }
 
   swimToTarget(): void {
     // let powerModifier = (this.getDistanceToTartget() / 3)
-    this.flap(this.target, 20)
+    this.flap(this.target, 40)
   }
 
   flap(toward: Phaser.Math.Vector2, power: number): void {
-    console.log("Power needed: " + power)
     if (Date.now() > this._lastFlapTime) {
       if (this.energy < power) {
         console.log("Fish is too tired to swim")
       } else {
-        console.log("Current engergy: " + this.energy)
         let angle = Phaser.Math.Angle.Between(this.x, this.y, toward.x, toward.y)
         let x = power * Math.cos(angle)
         let y = power * Math.sin(angle)

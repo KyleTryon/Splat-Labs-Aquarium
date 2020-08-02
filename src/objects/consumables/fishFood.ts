@@ -13,5 +13,7 @@ export default class FishFood extends Phaser.GameObjects.Sprite {
     // Set Body
     // @ts-ignore
     this._body = this.body
+    this._body.collideWorldBounds = true
   }
+
 }
