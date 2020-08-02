@@ -18,6 +18,7 @@ export default class HuntFood implements IRoutines {
     this._availableFood = this.fish.scene.fishFood
     if  (this._availableFood.getLength() > 0) {
       return 5
+      console.log("GET FOOD")
     } else {
       return 0
     }
@@ -44,6 +45,7 @@ export default class HuntFood implements IRoutines {
         closestFood[0].destroy()
       }
       this.fish.target = newTarget
+      this.fish.swimToTarget()
     }
   }
 

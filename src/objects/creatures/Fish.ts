@@ -65,13 +65,14 @@ export default class Fish extends Creature {
     this.rotation = currentAngle + (angleDiff * this._deltaTime)
   }
 
-  swimToTarget(): void {
-    // let powerModifier = (this.getDistanceToTartget() / 3)
-    this.flap(this.target, 40)
+  swimToTarget(speedModifier?: number): void {
+    speedModifier = speedModifier || 4
+    this.flap(this.target, speedModifier)
   }
 
   flap(toward: Phaser.Math.Vector2, power: number): void {
     if (Date.now() > this._lastFlapTime) {
+      power = this.speed * power
       if (this.energy < power) {
         console.log("Fish is too tired to swim")
       } else {

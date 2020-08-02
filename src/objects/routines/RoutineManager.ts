@@ -39,9 +39,9 @@ export default class RoutineManager {
     let highestPriority = this.routines.sort((routineA: IRoutines, routineB: IRoutines) => {
       let priorityA = routineA.getPriority()
       let priorityB = routineB.getPriority()
-      if (routineA > routineB) {
+      if (priorityA < priorityB) {
         return 1
-      } else if (routineA == routineB) {
+      } else if (priorityA == priorityB) {
         return 0
       } else {
         return -1
