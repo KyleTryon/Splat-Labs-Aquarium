@@ -14,14 +14,7 @@ export default abstract class Creature extends Phaser.GameObjects.Sprite {
 	hunger: number = 1
 	health: number = 1
 	speed: number = 10
-
-	private _energy: number = 1000
-	set energy(power: number) {
-		this._energy += power
-	}
-	get energy(): number {
-		return this._energy
-	}
+	energy: number
 	
 	fear: number = 0
 	/** Action */
@@ -32,6 +25,7 @@ export default abstract class Creature extends Phaser.GameObjects.Sprite {
 		super(params.scene, params.x, params.y, params.key, params.frame)
 		this.name = params.name
 		this.lifespan = params.lifespan
+		this.energy = 1000
 	}
 
 }

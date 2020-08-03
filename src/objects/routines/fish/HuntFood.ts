@@ -40,12 +40,16 @@ export default class HuntFood implements IRoutines {
         }
       })
       let newTarget = new Phaser.Math.Vector2((closestFood[0] as FishFood).x, (closestFood[0] as FishFood).y)
-      if (this.fish.getDistanceToTartget() < 10) {
-        console.log("Fish " + this.fish.name + " has eaten")
-        closestFood[0].destroy()
-      }
       this.fish.target = newTarget
-      this.fish.swimToTarget(20,2)
+      if (this.fish.getDistanceToTartget() < (this.fish.width / 4)) {
+        let energyFromFood = (closestFood[0] as FishFood).foodValue
+        this._availableFood.remove(closestFood[0], true)
+        console.log("Fish " + this.fish.name + " has eaten")
+        console.log("adding energy")
+        this.fish.energy += energyFromFood
+      } else {
+        this.fish.swimToTarget(20,2)
+      }
     }
   }
 
