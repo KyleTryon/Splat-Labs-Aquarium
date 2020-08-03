@@ -1,7 +1,7 @@
 import Creature from './Creature'
 import RoutineManager from '../routines/RoutineManager'
 import { AquariumScene } from '../../scenes/AquariumScene'
-import { Time } from 'phaser'
+
 
 export default class Fish extends Creature {
 
@@ -72,18 +72,19 @@ export default class Fish extends Creature {
 
   flap(toward: Phaser.Math.Vector2, power: number, speedModifier: number): void {
     speedModifier = speedModifier || 1
+    console.log(this.name + ": " + this.energy)
     if (Date.now() > this._lastFlapTime) {
       power = this.speed * power
       if (this.energy < power) {
         console.log("Fish is too tired to swim")
       } else {
+        this.energy -= (power/20)
         let angle = Phaser.Math.Angle.Between(this.x, this.y, toward.x, toward.y)
         let x = power * Math.cos(angle)
         let y = power * Math.sin(angle)
         let deltaX = this._body.velocity.x + (x - this._body.velocity.x)
         let deltaY = this._body.velocity.y + (y - this._body.velocity.y)
         this._body.setVelocity(deltaX,deltaY)
-        this.energy -= (power/10)
         this._lastFlapTime = (Date.now() + (2000 / speedModifier))
       }
     }
