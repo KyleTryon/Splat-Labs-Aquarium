@@ -12,8 +12,8 @@ export class Game extends Phaser.Game {
 export const config: Phaser.Types.Core.GameConfig = {
   title: 'Splat Labs Aquarium',
   version: "1.0",
-  width: 1920,
-  height: 1080,
+  width: "100%",
+  height: "80vh",
   type: Phaser.AUTO,
   parent: "game",
   scene: [BootScene, AquariumScene],
