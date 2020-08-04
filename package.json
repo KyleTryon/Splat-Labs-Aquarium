@@ -1,4 +1,5 @@
 {
+  "homepage": "https://kyletryon.github.io/Splat-Labs-Aquarium/",
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
