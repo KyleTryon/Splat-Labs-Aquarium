@@ -1,4 +1,4 @@
-import "/web_modules/phaser.js";
+import "https://kyletryon.github.io/Splat-Labs-Aquarium/web_modules/phaser.js";
 import {AquariumScene as AquariumScene2} from "./scenes/AquariumScene.js";
 import {BootScene as BootScene2} from "./scenes/BootScene.js";
 export class Game extends Phaser.Game {

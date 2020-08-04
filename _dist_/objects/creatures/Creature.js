@@ -1,4 +1,4 @@
-import "/web_modules/phaser.js";
+import "https://kyletryon.github.io/Splat-Labs-Aquarium/web_modules/phaser.js";
 export default class Creature extends Phaser.GameObjects.Sprite {
   constructor(params) {
     super(params.scene, params.x, params.y, params.key, params.frame);
