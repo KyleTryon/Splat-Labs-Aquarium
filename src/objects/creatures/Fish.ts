@@ -14,7 +14,6 @@ export default class Fish extends Creature {
 
   public constructor(params) {
     super(params)
-    this.desiredDepth = params.desiredDepth
     this.setScale(0.5)
     this.setOrigin(0.5, 0.5)
     this.target = this.scene.getRandomPoint()
@@ -31,6 +30,13 @@ export default class Fish extends Creature {
     this.routineManager = new RoutineManager({
       fish: this
     })
+    this.create()
+  }
+
+  create() {
+    let initPosition = this.scene.getRandomPoint()
+    this.x = initPosition.x
+    this.y = initPosition.y
   }
 
   update(delta: number): void {

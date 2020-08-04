@@ -2,6 +2,5 @@
   "scripts": {
     "mount:public": "mount public --to /",
     "mount:src": "mount src --to /_dist_"
-  },
-  "plugins": []
+  }
 }

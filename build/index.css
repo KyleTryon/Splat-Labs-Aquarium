@@ -1,14 +1,13 @@
-#img {
-  display: block;
-  margin: auto;
-  height: 128px;
-  width: 128px;
-  padding: 2rem;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+html, body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-#canvas {
-  display: block;
-  margin: 2rem auto;
-  width: 540px;
-  height: 540px;
+.wrapper {
+  max-width: 800px;
+  padding: 10px;
+  margin: auto;
+  text-align: center;
 }
