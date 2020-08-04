@@ -8,6 +8,35 @@ html, body {
 .wrapper {
   max-width: 800px;
   padding: 10px;
-  margin: auto;
+  margin: 1em auto;
   text-align: center;
+}
+
+.col {
+  flex-direction: column;
+}
+
+section {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.socialBar span {
+  display: block;
+  font-weight: bold;
+  padding: 0.4em;
+}
+.socialBar{
+  justify-content: space-around;
+}
+
+h1, h2, h3 {
+  min-width: 5em;
+  margin: 1em;
+  padding: 1em;
+}
+p {
+  margin: 0 1em;
 }
