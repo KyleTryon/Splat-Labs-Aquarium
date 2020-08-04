@@ -6,7 +6,6 @@ export default class Fish extends Creature2 {
     this.scene = this.scene;
     this.max_flap_speed = 1;
     this._lastFlapTime = 0;
-    this.desiredDepth = params.desiredDepth;
     this.setScale(0.5);
     this.setOrigin(0.5, 0.5);
     this.target = this.scene.getRandomPoint();
@@ -16,6 +15,12 @@ export default class Fish extends Creature2 {
     this.routineManager = new RoutineManager2({
       fish: this
     });
+    this.create();
+  }
+  create() {
+    let initPosition = this.scene.getRandomPoint();
+    this.x = initPosition.x;
+    this.y = initPosition.y;
   }
   update(delta) {
     this._deltaTime = delta / 100;

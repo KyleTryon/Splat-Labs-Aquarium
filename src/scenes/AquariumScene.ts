@@ -21,43 +21,59 @@ export class AquariumScene extends Phaser.Scene {
     this.fishFood = new Phaser.GameObjects.Group(this)
     this.creatures.add(new Fish({
       scene: this,
-      x: 100,
-      y: 100,
+      x: 0,
+      y: 0,
       key: "fish_red",
       lifespan: 360,
       name: "test1"
     }))
     this.creatures.add(new Fish({
       scene: this,
-      x: 600,
-      y: 600,
+      x: 0,
+      y: 0,
       key: "fish_red",
       lifespan: 360,
       name: "test2"
     }))
     this.creatures.add(new Fish({
       scene: this,
-      x: 1000,
-      y: 1000,
+      x: 0,
+      y: 0,
       key: "fish_red",
       lifespan: 360,
       name: "test3"
     }))
     this.creatures.add(new Fish({
       scene: this,
-      x:900,
-      y: 200,
+      x: 0,
+      y: 0,
       key: "fish_red",
       lifespan: 360,
       name: "test4"
     }))
     this.creatures.add(new Fish({
       scene: this,
-      x:200,
-      y: 900,
+      x: 0,
+      y: 0,
       key: "fish_red",
       lifespan: 360,
       name: "test4"
+    }))
+    this.creatures.add(new Fish({
+      scene: this,
+      x: 0,
+      y: 0,
+      key: "fish_red",
+      lifespan: 360,
+      name: "test5"
+    }))
+    this.creatures.add(new Fish({
+      scene: this,
+      x: 0,
+      y: 0,
+      key: "fish_red",
+      lifespan: 360,
+      name: "test6"
     }))
 
     this.input.on("pointerdown", () => {
