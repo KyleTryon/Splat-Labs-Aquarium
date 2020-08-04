@@ -39,3 +39,6 @@ window.addEventListener("load", () => {
   var game = new Game(config);
   console.log("Game Created");
 });
+window.onresize = function() {
+  location.reload();
+};
