@@ -1,4 +1,4 @@
-import "/web_modules/phaser.js";
+import "https://kyletryon.github.io/Splat-Labs-Aquarium/web_modules/phaser.js";
 export default class FishFood extends Phaser.GameObjects.Sprite {
   constructor(params) {
     super(params.scene, params.x, params.y, "fish_food", params.frame);
