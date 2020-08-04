@@ -45,6 +45,7 @@ export default class Fish extends Creature {
     //Moves the fish to opposite side of bowl if off screen.
     this.edgeCheck()
     this.rotateToTarget()
+    console.log(this.angle)
   }
 
   getDistanceToTartget(): number {
@@ -63,7 +64,7 @@ export default class Fish extends Creature {
     let angleToTarget = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y)
     let currentAngle = this.rotation
     let angleDiff = angleToTarget - currentAngle
-    if (this.angle < -90 || this.angle > 160){
+    if (this.angle < -90 || this.angle > 90) {
       this.flipY = true
     } else {
       this.flipY = false
@@ -78,7 +79,6 @@ export default class Fish extends Creature {
 
   flap(toward: Phaser.Math.Vector2, power: number, speedModifier: number): void {
     speedModifier = speedModifier || 1
-    console.log(this.name + ": " + this.energy)
     if (Date.now() > this._lastFlapTime) {
       power = this.speed * power
       if (this.energy < power) {
@@ -91,7 +91,8 @@ export default class Fish extends Creature {
         let deltaX = this._body.velocity.x + (x - this._body.velocity.x)
         let deltaY = this._body.velocity.y + (y - this._body.velocity.y)
         this._body.setVelocity(deltaX,deltaY)
-        this._lastFlapTime = (Date.now() + (2000 / speedModifier))
+
+        this._lastFlapTime = ((Date.now() + (this.getPrecisionVariableOffset())) + (2000 / speedModifier))
       }
     }
   }

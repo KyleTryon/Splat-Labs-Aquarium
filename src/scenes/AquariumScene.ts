@@ -76,6 +76,7 @@ export class AquariumScene extends Phaser.Scene {
       name: "test6"
     }))
 
+
     this.input.on("pointerdown", () => {
       this.fishFood.add (new FishFood({
         scene: this,

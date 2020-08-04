@@ -28,4 +28,8 @@ export default abstract class Creature extends Phaser.GameObjects.Sprite {
 		this.energy = 1000
 	}
 
+	protected getPrecisionVariableOffset(): number {
+		return Phaser.Math.Between(-100, 100)
+	}
+
 }
