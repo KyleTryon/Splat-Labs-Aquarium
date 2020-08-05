@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@snowpack/plugin-webpack": "^2.0.1",
-    "phaser3_gui_inspector": "^1.2.0",
+    "phaser3_gui_inspector": "^1.2.1",
     "prettier": "^2.0.5",
     "snowpack": "^2.6.4"
   }
