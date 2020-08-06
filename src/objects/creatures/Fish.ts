@@ -30,13 +30,18 @@ export default class Fish extends Creature {
     this.routineManager = new RoutineManager({
       fish: this
     })
-    this.create()
+    this.create(params.x, params.y)
   }
 
-  create() {
-    let initPosition = this.scene.getRandomPoint()
-    this.x = initPosition.x
-    this.y = initPosition.y
+  create(x?: number, y?: number) {
+    if (x && y) {
+      this.x = x
+      this.y = y
+    } else {
+      let initPosition = this.scene.getRandomPoint()
+      this.x = initPosition.x
+      this.y = initPosition.y
+    }
   }
 
   update(delta: number): void {
@@ -45,7 +50,6 @@ export default class Fish extends Creature {
     //Moves the fish to opposite side of bowl if off screen.
     this.edgeCheck()
     this.rotateToTarget()
-    console.log(this.angle)
   }
 
   getDistanceToTartget(): number {
@@ -91,7 +95,6 @@ export default class Fish extends Creature {
         let deltaX = this._body.velocity.x + (x - this._body.velocity.x)
         let deltaY = this._body.velocity.y + (y - this._body.velocity.y)
         this._body.setVelocity(deltaX,deltaY)
-
         this._lastFlapTime = ((Date.now() + (this.getPrecisionVariableOffset())) + (2000 / speedModifier))
       }
     }
