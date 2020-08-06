@@ -14,6 +14,13 @@ export class AquariumScene extends Phaser.Scene {
     this.creatures = new Phaser.GameObjects.Group(this);
     this.fishFood = new Phaser.GameObjects.Group(this);
     this.loadAquarium();
+    this.input.on("pointerdown", () => {
+      this.fishFood.add(new FishFood({
+        scene: this,
+        x: this.input.x,
+        y: this.input.y
+      }));
+    });
     this.input.on("gameout", () => {
       console.log("leaving game");
       this.saveAquarium();
