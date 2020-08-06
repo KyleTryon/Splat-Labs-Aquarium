@@ -13,4 +13,7 @@ export default class Creature extends Phaser.GameObjects.Sprite {
     this.lifespan = params.lifespan;
     this.energy = 1000;
   }
+  getPrecisionVariableOffset() {
+    return Phaser.Math.Between(-100, 100);
+  }
 }
