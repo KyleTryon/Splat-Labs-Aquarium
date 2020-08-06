@@ -15,12 +15,17 @@ export default class Fish extends Creature2 {
     this.routineManager = new RoutineManager2({
       fish: this
     });
-    this.create();
+    this.create(params.x, params.y);
   }
-  create() {
-    let initPosition = this.scene.getRandomPoint();
-    this.x = initPosition.x;
-    this.y = initPosition.y;
+  create(x, y) {
+    if (x && y) {
+      this.x = x;
+      this.y = y;
+    } else {
+      let initPosition = this.scene.getRandomPoint();
+      this.x = initPosition.x;
+      this.y = initPosition.y;
+    }
   }
   update(delta) {
     this._deltaTime = delta / 100;
@@ -43,7 +48,7 @@ export default class Fish extends Creature2 {
     let angleToTarget = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y);
     let currentAngle = this.rotation;
     let angleDiff = angleToTarget - currentAngle;
-    if (this.angle < -90 || this.angle > 160) {
+    if (this.angle < -90 || this.angle > 90) {
       this.flipY = true;
     } else {
       this.flipY = false;
@@ -56,7 +61,6 @@ export default class Fish extends Creature2 {
   }
   flap(toward, power, speedModifier) {
     speedModifier = speedModifier || 1;
-    console.log(this.name + ": " + this.energy);
     if (Date.now() > this._lastFlapTime) {
       power = this.speed * power;
       if (this.energy < power) {
@@ -69,7 +73,7 @@ export default class Fish extends Creature2 {
         let deltaX = this._body.velocity.x + (x - this._body.velocity.x);
         let deltaY = this._body.velocity.y + (y - this._body.velocity.y);
         this._body.setVelocity(deltaX, deltaY);
-        this._lastFlapTime = Date.now() + 2000 / speedModifier;
+        this._lastFlapTime = Date.now() + this.getPrecisionVariableOffset() + 2000 / speedModifier;
       }
     }
   }
