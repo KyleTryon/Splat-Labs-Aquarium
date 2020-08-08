@@ -17,8 +17,7 @@ export default class HuntFood implements IRoutines {
   getPriority(): number {
     this._availableFood = this.fish.scene.fishFood
     if  (this._availableFood.getLength() > 0) {
-      return 5
-      console.log("GET FOOD")
+      return 2
     } else {
       return 0
     }
@@ -44,8 +43,6 @@ export default class HuntFood implements IRoutines {
       if (this.fish.getDistanceToTartget() < (this.fish.width / 4)) {
         let energyFromFood = (closestFood[0] as FishFood).foodValue
         this._availableFood.remove(closestFood[0], true)
-        console.log("Fish " + this.fish.name + " has eaten")
-        console.log("adding energy")
         this.fish.energy += energyFromFood
       } else {
         this.fish.swimToTarget(20,2)

@@ -10,6 +10,11 @@
         "type": "image",
         "key": "fish_food",
         "url": "assets/images/fish_food.png"
+      },
+      {
+        "type": "image",
+        "key": "consumable_coin",
+        "url": "assets/images/other/coin.png"
       }
     ]
   }
