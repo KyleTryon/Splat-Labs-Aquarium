@@ -9,6 +9,7 @@ export class AquariumScene extends Phaser.Scene {
 
   private creatures: Phaser.GameObjects.Group
   public  fishFood: Phaser.GameObjects.Group
+  public  coins: Phaser.GameObjects.Group
 
   constructor() {
     super({
@@ -25,6 +26,7 @@ export class AquariumScene extends Phaser.Scene {
   create(): void {
     this.creatures = new Phaser.GameObjects.Group(this)
     this.fishFood = new Phaser.GameObjects.Group(this)
+    this.coins = new Phaser.GameObjects.Group(this)
     this.loadAquarium()
     this.input.on("pointerdown", () => {
       this.fishFood.add (new FishFood({
@@ -34,8 +36,11 @@ export class AquariumScene extends Phaser.Scene {
       }))
     })
     this.input.on("gameout", () => {
-     console.log("leaving game")
      this.saveAquarium()
+     const text_saved = this.add.text(15, (this.cameras.main.height - 25), "Game Saved.")
+     const timer = this.time.delayedCall(1000, () => {
+      text_saved.destroy()
+     })
     })
   }
 
@@ -105,14 +110,6 @@ export class AquariumScene extends Phaser.Scene {
         lifespan: 360,
         name: "test4"
       }))
-     
-      this.input.on("pointerdown", () => {
-        this.fishFood.add (new FishFood({
-          scene: this,
-          x: this.input.x,
-          y: this.input.y
-        }))
-      })
     }
   }
 
@@ -122,6 +119,5 @@ export class AquariumScene extends Phaser.Scene {
     }
     localStorage.setItem('saveFile',JSON.stringify(saveState))
     console.log("Game Saved")
-    console.log(JSON.stringify(saveState))
   }
 }
