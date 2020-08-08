@@ -1,5 +1,6 @@
 import Wander2 from "./fish/Wander.js";
 import HuntFood2 from "./fish/HuntFood.js";
+import DropLoot2 from "./fish/DropLoot.js";
 export default class RoutineManager {
   constructor(params) {
     let _routines = [];
@@ -8,6 +9,9 @@ export default class RoutineManager {
       fish: this.fish
     }));
     _routines.push(new HuntFood2({
+      fish: this.fish
+    }));
+    _routines.push(new DropLoot2({
       fish: this.fish
     }));
     this.routines = _routines;
