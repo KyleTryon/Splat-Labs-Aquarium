@@ -8,7 +8,7 @@ export default class FishFood extends Phaser.GameObjects.Sprite {
   public readonly foodValue: number = 20
   constructor(params) {
     super(params.fish.scene, params.fish.x, params.fish.y, "consumable_coin")
-    this.setScale(0.25)
+    this.setScale(0.18)
     // Add Physics
     this.scene.add.existing(this)
     this.scene.physics.add.existing(this)

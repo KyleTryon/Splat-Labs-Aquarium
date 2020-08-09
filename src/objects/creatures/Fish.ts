@@ -7,9 +7,9 @@ export default class Fish extends Creature {
 
   routineManager: RoutineManager
   scene: AquariumScene = this.scene
-  max_flap_speed = 1
+  private _min_flap_delay = 1500
   private _lastFlapTime: number = 0
-  private _deltaTime: number
+  public _deltaTime: number
 
 
   public constructor(params) {
@@ -17,6 +17,7 @@ export default class Fish extends Creature {
     this.setScale(0.5)
     this.setOrigin(0.5, 0.5)
     this.target = this.scene.getRandomPoint()
+    this.depth = 1
 
     // Add Physics
     this.scene.add.existing(this)
@@ -81,7 +82,7 @@ export default class Fish extends Creature {
     this.flap(this.target, power, speedModifier)
   }
 
-  flap(toward: Phaser.Math.Vector2, power: number, speedModifier: number): void {
+  flap(toward: Phaser.Math.Vector2, power: number, speedModifier?: number): void {
     speedModifier = speedModifier || 1
     if (Date.now() > this._lastFlapTime) {
       power = this.speed * power
@@ -95,7 +96,7 @@ export default class Fish extends Creature {
         let deltaX = this._body.velocity.x + (x - this._body.velocity.x)
         let deltaY = this._body.velocity.y + (y - this._body.velocity.y)
         this._body.setVelocity(deltaX,deltaY)
-        this._lastFlapTime = ((Date.now() + (this.getPrecisionVariableOffset())) + (2000 / speedModifier))
+        this._lastFlapTime = ((Date.now() + (this.getPrecisionVariableOffset())) + (this._min_flap_delay / speedModifier))
       }
     }
   }
