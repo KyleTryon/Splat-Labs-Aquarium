@@ -26,9 +26,10 @@ export default class DropLoot implements IRoutines {
     if (Date.now() > (this._lastDropTime)) {
       let rand = Math.random()
       if (rand > 0.9) {
+        console.log("Supposed to drop a coin")
         return 5
       } else {
-        // this.reset()
+        console.log("timer has been reset and a 0 will be returned now")
         return 0
       }
     } else {
@@ -36,7 +37,7 @@ export default class DropLoot implements IRoutines {
     }
   }
 
-  reset() {
+  reset(): void {
     console.log("resetting")
     this._lastDropTime = (Date.now() + this._minDropWait)
   }

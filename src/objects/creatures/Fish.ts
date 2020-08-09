@@ -9,7 +9,7 @@ export default class Fish extends Creature {
   scene: AquariumScene = this.scene
   max_flap_speed = 1
   private _lastFlapTime: number = 0
-  private _deltaTime: number
+  public _deltaTime: number
 
 
   public constructor(params) {
