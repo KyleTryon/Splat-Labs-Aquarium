@@ -3,23 +3,24 @@ export default class DropLoot {
   constructor(params) {
     this.name = "DropLoot";
     this.fish = params.fish;
-    this._lastDropTime = Date.now() + 6000;
-    this._minDropWait = 15000;
+    this._minDropWait = 8000;
+    this._lastDropTime = Date.now() + this._minDropWait;
+    this.priority = 0;
   }
-  getPriority() {
+  calcPriority() {
     if (Date.now() > this._lastDropTime) {
+      this.reset();
       let rand = Math.random();
-      if (rand > 0.9) {
-        return 5;
+      if (rand > 0.85) {
+        this.priority = 1;
       } else {
-        return 0;
+        this.priority = 0;
       }
     } else {
-      return 0;
+      this.priority = 0;
     }
   }
   reset() {
-    console.log("resetting");
     this._lastDropTime = Date.now() + this._minDropWait;
   }
   execute() {

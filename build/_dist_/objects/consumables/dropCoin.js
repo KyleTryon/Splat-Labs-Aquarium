@@ -3,7 +3,7 @@ export default class FishFood extends Phaser.GameObjects.Sprite {
   constructor(params) {
     super(params.fish.scene, params.fish.x, params.fish.y, "consumable_coin");
     this.foodValue = 20;
-    this.setScale(0.25);
+    this.setScale(0.18);
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
     this._body = this.body;

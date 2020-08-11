@@ -13,32 +13,32 @@ interface params {
 export default class DropLoot implements IRoutines {
   name: string = "DropLoot"
   fish: Fish
+  priority: number
   private _lastDropTime: number
   private _minDropWait: number
 
   constructor(params: params) {
     this.fish = params.fish
-    this._lastDropTime = Date.now() + 6000
-    this._minDropWait = 15000 // 5 seconds
+    this._minDropWait = 8000 // 5 seconds
+    this._lastDropTime = Date.now() + this._minDropWait
+    this.priority = 0
   }
 
-  getPriority(): number {
+  calcPriority(): void {
     if (Date.now() > (this._lastDropTime)) {
+      this.reset()
       let rand = Math.random()
-      if (rand > 0.9) {
-        console.log("Supposed to drop a coin")
-        return 5
+      if (rand > 0.85) {
+        this.priority = 1
       } else {
-        console.log("timer has been reset and a 0 will be returned now")
-        return 0
+        this.priority = 0
       }
     } else {
-      return 0
+      this.priority = 0
     }
   }
 
   reset(): void {
-    console.log("resetting")
     this._lastDropTime = (Date.now() + this._minDropWait)
   }
 

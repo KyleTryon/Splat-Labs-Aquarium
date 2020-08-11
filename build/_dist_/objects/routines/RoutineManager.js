@@ -3,27 +3,25 @@ import HuntFood2 from "./fish/HuntFood.js";
 import DropLoot2 from "./fish/DropLoot.js";
 export default class RoutineManager {
   constructor(params) {
-    let _routines = [];
+    this.routines = [];
     this.fish = params.fish;
-    _routines.push(new Wander2({
+    this.routines.push(new Wander2({
       fish: this.fish
     }));
-    _routines.push(new HuntFood2({
+    this.routines.push(new HuntFood2({
       fish: this.fish
     }));
-    _routines.push(new DropLoot2({
+    this.routines.push(new DropLoot2({
       fish: this.fish
     }));
-    this.routines = _routines;
   }
   execute() {
+    this.routines.forEach((routine) => {
+      routine.calcPriority();
+    });
     let highestPriority = this.routines.sort((routineA, routineB) => {
-      let priorityA = routineA.getPriority();
-      let priorityB = routineB.getPriority();
-      if (priorityA < priorityB) {
+      if (routineA.priority <= routineB.priority) {
         return 1;
-      } else if (priorityA == priorityB) {
-        return 0;
       } else {
         return -1;
       }

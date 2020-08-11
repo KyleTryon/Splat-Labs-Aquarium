@@ -12,13 +12,15 @@ interface params {
 export default class Wander implements IRoutines {
   name: string = "Wander"
   fish: Fish
+  priority: number
 
   constructor(params: params) {
     this.fish = params.fish
+    this.priority = 0.1
   }
 
-  getPriority(): number {
-    return 1
+  calcPriority(): void {
+    this.priority = 0.1
   }
 
   execute(): void {
