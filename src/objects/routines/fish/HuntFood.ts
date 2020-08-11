@@ -11,16 +11,20 @@ export default class HuntFood implements IRoutines {
   name: string = "HuntFood"
   fish: Fish
   private _availableFood: Phaser.GameObjects.Group
+  priority: number
+
   constructor(params: params) {
     this.fish = params.fish
+    this.priority = 0
   }
-  getPriority(): number {
+
+  calcPriority(): void {
     this._availableFood = this.fish.scene.fishFood
     if  (this._availableFood.getLength() > 0) {
-      return 2
+      this.priority = 0.99
     } else {
-      return 0
-    }
+      this.priority = 0
+  }
     
   }
   execute(): void {

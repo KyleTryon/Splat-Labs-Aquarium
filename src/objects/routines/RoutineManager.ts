@@ -31,14 +31,18 @@ export default class RoutineManager {
   }
 
   execute(): void {
+    this.routines.forEach(routine => {
+      routine.calcPriority()
+    })
     // Determine the routine to run and call execute() on it
     let highestPriority = this.routines.sort((routineA: IRoutines, routineB: IRoutines) => {
-      if (routineA.getPriority() <= routineB.getPriority()) {
+      if (routineA.priority <= routineB.priority) {
         return 1
       } else {
         return -1
       }
     })
+    // console.log(highestPriority)
     highestPriority[0].execute()
   }
 }

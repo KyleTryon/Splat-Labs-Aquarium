@@ -3,6 +3,7 @@
  * @Interface
  */
 export interface IRoutines {
+  priority: number
   /**
    * Name your routine
    */
@@ -14,7 +15,7 @@ export interface IRoutines {
   /**
    * Priority is used to order tasks. A scale of [0-1] is recommended to reflect zero need, to imminent death without satiation.
    */
-  getPriority(): number
+  calcPriority(): void
   /**
    * Invoked when the routine is called.
    */
