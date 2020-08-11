@@ -4,11 +4,12 @@ export default class Fish extends Creature2 {
   constructor(params) {
     super(params);
     this.scene = this.scene;
-    this.max_flap_speed = 1;
+    this._min_flap_delay = 1500;
     this._lastFlapTime = 0;
     this.setScale(0.5);
     this.setOrigin(0.5, 0.5);
     this.target = this.scene.getRandomPoint();
+    this.depth = 1;
     this.scene.add.existing(this);
     this.scene.physics.add.existing(this);
     this._body = this.body;
@@ -73,7 +74,7 @@ export default class Fish extends Creature2 {
         let deltaX = this._body.velocity.x + (x - this._body.velocity.x);
         let deltaY = this._body.velocity.y + (y - this._body.velocity.y);
         this._body.setVelocity(deltaX, deltaY);
-        this._lastFlapTime = Date.now() + this.getPrecisionVariableOffset() + 2000 / speedModifier;
+        this._lastFlapTime = Date.now() + this.getPrecisionVariableOffset() + this._min_flap_delay / speedModifier;
       }
     }
   }
