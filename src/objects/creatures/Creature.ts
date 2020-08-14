@@ -28,6 +28,13 @@ export default abstract class Creature extends Phaser.GameObjects.Sprite {
 		this.name = params.name
 		this.lifespan = params.lifespan
 		this.energy = 1000
+		// Add Physics
+		this.scene.add.existing(this)
+		this.scene.physics.add.existing(this)
+		// Set Body
+		// @ts-ignore
+		this._body = this.body
+		this._body.collideWorldBounds = true
 		// Run vitals
 		this.scene.time.addEvent({
 			delay: 1000,

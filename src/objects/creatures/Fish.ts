@@ -18,14 +18,6 @@ export default class Fish extends Creature {
     this.target = this.scene.getRandomPoint()
     this.depth = 1
 
-    // Add Physics
-    this.scene.add.existing(this)
-    this.scene.physics.add.existing(this)
-
-    // Set Body
-    // @ts-ignore
-    this._body = this.body
-
     //Create Routine Manager
     this.routineManager = new RoutineManager({
       fish: this
@@ -48,7 +40,6 @@ export default class Fish extends Creature {
     this._deltaTime = (delta / 100 )
     this.routineManager.execute()
     //Moves the fish to opposite side of bowl if off screen.
-    this.edgeCheck()
     this.rotateToTarget()
   }
 
@@ -56,14 +47,6 @@ export default class Fish extends Creature {
     return Phaser.Math.Distance.Between(this.x, this.y, this.target.x, this.target.y)
   }
 
-  private edgeCheck(): void {
-    if (this.x >= (this.scene.cameras.main.width + (this.width / 2))) {
-      this.x = 0 - this.width
-    }
-    if (this.y >= (this.scene.cameras.main.height + (this.height / 2))) {
-      this.y = 0 - this.height
-    } 
-  }
   private rotateToTarget(): void {
     let angleToTarget = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y)
     let currentAngle = this.rotation
