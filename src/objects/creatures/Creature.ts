@@ -14,6 +14,7 @@ export default abstract class Creature extends Phaser.GameObjects.Sprite {
 	age: number = 0
 	level: number = 1
 	private _maxFoodLevel: number
+	perceptionDistance: number
 	foodLevel: number = 10
 	health: number = 1
 	speed: number = 10
@@ -24,10 +25,13 @@ export default abstract class Creature extends Phaser.GameObjects.Sprite {
 
 	public constructor(params) {
 		super(params.scene, params.x, params.y, params.key, params.frame)
+		// Create
 		this.setScale(this._initalScale)
 		this.name = params.name
 		this.lifespan = params.lifespan
 		this.energy = 1000
+		// Set initial values
+		this.perceptionDistance = (this.scene.cameras.main.width / 1.5)
 		// Add Physics
 		this.scene.add.existing(this)
 		this.scene.physics.add.existing(this)
@@ -36,12 +40,12 @@ export default abstract class Creature extends Phaser.GameObjects.Sprite {
 		this._body = this.body
 		this._body.collideWorldBounds = true
 		// Run vitals
-		this.scene.time.addEvent({
-			delay: 1000,
-			callback: () => {
-				this.vitals()
-			}
-		})
+		// this.scene.time.addEvent({
+		// 	delay: 1000,
+		// 	callback: () => {
+		// 		this.vitals()
+		// 	}
+		// })
 	}
 
 	protected getPrecisionVariableOffset(): number {
