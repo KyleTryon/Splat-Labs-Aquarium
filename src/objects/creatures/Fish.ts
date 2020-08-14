@@ -14,7 +14,6 @@ export default class Fish extends Creature {
 
   public constructor(params) {
     super(params)
-    this.setScale(0.5)
     this.setOrigin(0.5, 0.5)
     this.target = this.scene.getRandomPoint()
     this.depth = 1
