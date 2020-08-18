@@ -51,10 +51,10 @@ export class AquariumScene extends Phaser.Scene {
   }
 
   public getRandomPoint(): Phaser.Math.Vector2 {
-    let screenWidth = this.cameras.main.width
-    let screenHeight = this.cameras.main.height
+    let screenWidth = this.cameras.main.width - 10
+    let screenHeight = this.cameras.main.height - 10
     let x = Math.random() * screenWidth
-    let y = Math.random() * screenHeight
+    let y = Math.random() * screenHeight // may remove later, noticing some fish tring to go under the screen
     return new Phaser.Math.Vector2(x,y)
   }
 
