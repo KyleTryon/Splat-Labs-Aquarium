@@ -1,21 +1,18 @@
-import { IRoutines } from "../IRoutines"
-import Fish from '../../creatures/Fish'
+import Routine from "../Routine"
 import FishFood from '../../consumables/fishFood'
 
-interface params {
-  fish: Fish
+import IRoutineParameters from '../IRoutineParameters'
 
-}
-
-export default class HuntFood implements IRoutines {
-  name: string = "HuntFood"
-  fish: Fish
+export default class HuntFood extends Routine {
   private _availableFood: Phaser.GameObjects.Group
   priority: number
 
-  constructor(params: params) {
-    this.fish = params.fish
-    this.priority = 0
+  constructor(parameters: IRoutineParameters) {
+    super({
+      name: "hunt",
+      priority: 0.1,
+      fish: parameters.fish
+    })
   }
 
   calcPriority(): void {
@@ -43,17 +40,20 @@ export default class HuntFood implements IRoutines {
         }
       })
       let distToFood = Phaser.Math.Distance.Between(this.fish.x, this.fish.y,(closestFood[0] as FishFood).x, (closestFood[0] as FishFood).y)
-      if (distToFood < 10) {
-        let energyFromFood = (closestFood[0] as FishFood).foodValue
-        this._availableFood.remove(closestFood[0], true)
-        this.fish.energy += energyFromFood
-      } else {
+      if (distToFood < (this.fish.width / 2)) {
+        this.eatFood((closestFood[0] as FishFood))
+      } else if (distToFood < this.fish.perceptionDistance) {
         let foodVelocity = (closestFood[0] as FishFood)._body.velocity
         let newTarget = new Phaser.Math.Vector2(((closestFood[0] as FishFood).x + (foodVelocity.x * this.fish._deltaTime)), ((closestFood[0] as FishFood).y) +(foodVelocity.y * this.fish._deltaTime))
         this.fish.target = newTarget
         this.fish.swimToTarget(20,2)
       }
     }
+  }
+
+  eatFood(food: FishFood): void {
+    this._availableFood.remove(food, true)
+    this.fish.energy += food.foodValue
   }
 
 }

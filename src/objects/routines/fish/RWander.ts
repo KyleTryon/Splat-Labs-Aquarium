@@ -1,22 +1,19 @@
-import { IRoutines } from "../IRoutines"
-import Fish from '../../creatures/Fish'
+import Routine from '../Routine'
 
-interface params {
-  fish: Fish
-}
+import IRoutineParameters from '../IRoutineParameters'
 
 /**
  * Behavior: Randomly swim in tank. Managed by a RoutineManager.
  * @class
  */
-export default class Wander implements IRoutines {
-  name: string = "Wander"
-  fish: Fish
-  priority: number
+export default class RWander extends Routine {
 
-  constructor(params: params) {
-    this.fish = params.fish
-    this.priority = 0.1
+  constructor(parameters: IRoutineParameters){
+    super({
+      name: "wander",
+      priority: 0.1,
+      fish: parameters.fish
+    })
   }
 
   calcPriority(): void {

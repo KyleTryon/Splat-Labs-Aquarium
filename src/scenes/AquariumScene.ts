@@ -51,8 +51,9 @@ export class AquariumScene extends Phaser.Scene {
   }
 
   public getRandomPoint(): Phaser.Math.Vector2 {
-    let screenWidth = this.cameras.main.width
-    let screenHeight = this.cameras.main.height
+    // Revisit this, ensure the random point falls within the screen by at least the width of a fish
+    let screenWidth = (this.cameras.main.width - 100)
+    let screenHeight = (this.cameras.main.height - 100)
     let x = Math.random() * screenWidth
     let y = Math.random() * screenHeight
     return new Phaser.Math.Vector2(x,y)
@@ -81,7 +82,7 @@ export class AquariumScene extends Phaser.Scene {
         y: 0,
         key: "fish_red",
         lifespan: 360,
-        name: "test1"
+        name: "Moby"
       }))
   
       this.creatures.add(new Fish({
@@ -90,7 +91,7 @@ export class AquariumScene extends Phaser.Scene {
         y: 0,
         key: "fish_red",
         lifespan: 360,
-        name: "test2"
+        name: "Nemo"
       }))
   
       this.creatures.add(new Fish({
@@ -99,7 +100,7 @@ export class AquariumScene extends Phaser.Scene {
         y: 0,
         key: "fish_red",
         lifespan: 360,
-        name: "test3"
+        name: "Lance"
       }))
   
       this.creatures.add(new Fish({
@@ -108,7 +109,7 @@ export class AquariumScene extends Phaser.Scene {
         y: 0,
         key: "fish_red",
         lifespan: 360,
-        name: "test4"
+        name: "Jack"
       }))
     }
   }

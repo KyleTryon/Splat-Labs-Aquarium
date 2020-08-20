@@ -1,34 +1,31 @@
-import { IRoutines } from "../IRoutines"
-import Fish from '../../creatures/Fish'
+import Routine from '../Routine'
 import dropCoin from '../../consumables/dropCoin'
+import IRoutineParameters from '../IRoutineParameters'
 
-interface params {
-  fish: Fish
-}
 
 /**
  * Behavior: Randomly swim in tank. Managed by a RoutineManager.
  * @class
  */
-export default class DropLoot implements IRoutines {
-  name: string = "DropLoot"
-  fish: Fish
-  priority: number
+export default class RDropLoot extends Routine {
   private _lastDropTime: number
   private _minDropWait: number
 
-  constructor(params: params) {
-    this.fish = params.fish
-    this._minDropWait = 8000 // 5 seconds
+  constructor(parameters: IRoutineParameters){
+    super({
+      name: "dropLoot",
+      priority: 0,
+      fish: parameters.fish
+    })
+    this._minDropWait = 8000 // 8 seconds
     this._lastDropTime = Date.now() + this._minDropWait
-    this.priority = 0
   }
 
   calcPriority(): void {
     if (Date.now() > (this._lastDropTime)) {
       this.reset()
       let rand = Math.random()
-      if (rand > 0.85) {
+      if (rand > 0.9) {
         this.priority = 1
       } else {
         this.priority = 0

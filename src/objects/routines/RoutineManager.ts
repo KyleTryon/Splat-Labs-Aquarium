@@ -1,48 +1,45 @@
-import { IRoutines } from "./IRoutines"
-import Fish from "../creatures/Fish"
-import Wander from './fish/Wander'
-import HuntFood from './fish/HuntFood'
-import DropLoot from './fish/DropLoot'
+import Routine from './Routine'
+import Fish from '../creatures/Fish'
 
-interface params {
+// Import Routines
+import RWander from './fish/RWander'
+import RHuntFood from './fish/RHuntFood'
+import RDropLoot from './fish/RDropLoot'
+
+
+interface RoutineManagerParameters {
   fish: Fish
 }
-
 /**
- * Instantiate a RoutineManager on a creature to give it behaviors and priorities.
+ * Add and manage routine behaviors for a Creature
  * @class
  */
 export default class RoutineManager {
-  routines: Array<IRoutines> = []
   fish: Fish
+  routines: Array<Routine> = []
+  activeRoutine: Routine
 
-
-  constructor(params: params) {
-    this.fish = params.fish
-    this.routines.push(new Wander({
-      fish: this.fish
-    }))
-    this.routines.push(new HuntFood({
-      fish: this.fish
-    }))
-    this.routines.push(new DropLoot({
-      fish: this.fish
-    }))
+  constructor(parameters: RoutineManagerParameters) {
+    this.fish = parameters.fish
+    this.routines.push(
+      new RWander({fish: this.fish}),
+      new RHuntFood({fish: this.fish}),
+      new RDropLoot({fish: this.fish})
+      )
   }
 
-  execute(): void {
+  run(): void {
     this.routines.forEach(routine => {
       routine.calcPriority()
     })
-    // Determine the routine to run and call execute() on it
-    let highestPriority = this.routines.sort((routineA: IRoutines, routineB: IRoutines) => {
-      if (routineA.priority <= routineB.priority) {
+    let highestPriority = this.routines.sort((R1: Routine, R2: Routine) => {
+      if (R1.priority < R2.priority) {
         return 1
       } else {
         return -1
       }
     })
-    // console.log(highestPriority)
-    highestPriority[0].execute()
+    this.activeRoutine = highestPriority[0]
+    this.activeRoutine.execute()
   }
 }
