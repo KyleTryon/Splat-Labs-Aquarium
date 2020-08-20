@@ -1,0 +1,1 @@
+import i from"../Routine.js";export default class e extends i{constructor(t){super({name:"wander",priority:.1,fish:t.fish})}calcPriority(){this.priority=.1}execute(){this.fish.getDistanceToTartget()<4?this.fish.target=this.fish.scene.getRandomPoint():this.fish.swimToTarget()}}
