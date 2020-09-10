@@ -13,6 +13,6 @@
   "devDependencies": {
     "@snowpack/plugin-webpack": "^2.0.4",
     "prettier": "^2.0.5",
-    "snowpack": "^2.8.0"
+    "snowpack": "^2.10.3"
   }
 }
