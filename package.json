@@ -8,7 +8,7 @@
     "lint": "prettier --check \"src/**/*.js\""
   },
   "dependencies": {
-    "phaser": "^3.24.1"
+    "phaser": "^3.54.0"
   },
   "devDependencies": {
     "@snowpack/plugin-webpack": "^2.0.4",
