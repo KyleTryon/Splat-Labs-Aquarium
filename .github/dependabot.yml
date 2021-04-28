@@ -1,0 +1,29 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "10:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: snowpack
+    versions:
+    - 3.0.11
+    - 3.0.12
+    - 3.0.13
+    - 3.1.2
+    - 3.2.2
+    - 3.3.0
+    - 3.3.5
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+    - 4.0.2
+  - dependency-name: phaser
+    versions:
+    - 3.52.0
+    - 3.53.1
+  - dependency-name: "@snowpack/plugin-webpack"
+    versions:
+    - 2.3.0
